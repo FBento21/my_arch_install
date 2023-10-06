@@ -10,7 +10,7 @@ echo "arch" >> /etc/hostname
 
 # Set root password (we do not use chpasswd because it does not support YESCRYPT)
 read -p "Enter root password: " PASSWORD
-echo -e “${PASSWORD}\n${PASSWORD}” | passwd root
+echo -e "${PASSWORD}\n${PASSWORD}" | passwd root
 unset PASSWORD
 
 # You may need to Update reflector
@@ -61,8 +61,10 @@ useradd -m $normal_user # Add username
 usermod -aG wheel $normal_user #Add username
 
 read -p "Enter user password: " PASSWORD
-echo -e “${PASSWORD}\n${PASSWORD}” | passwd $normal_user
+echo -e "${PASSWORD}\n${PASSWORD}" | passwd $normal_user
 unset PASSWORD
+
+sed -i '86/.//' /etc/sudoers
 
 # Remove the git folder
 rm -rf /my_arch_install
