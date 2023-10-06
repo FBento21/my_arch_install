@@ -10,7 +10,7 @@ echo "arch" >> /etc/hostname
 
 # Set root password (we do not use chpasswd because it does not support YESCRYPT)
 read -p "Enter root password: " PASSWORD
-echo -e “${PASSWORD}\n${PASSWORD}” | passwd $USER
+echo -e “${PASSWORD}\n${PASSWORD}” | passwd root
 unset PASSWORD
 
 # You may need to Update reflector
@@ -52,18 +52,19 @@ systemctl enable paccache.timer
 systemctl enable systemd-oomd.service
 systemctl enable systemd-resolved.service
 systemctl enable systemd-zram-setup@zram0.service
-systemctl enable gdm.service
 systemctl enable apparmor.service
 
 # Create username
 read -p "Enter user: " normal_user
 
 useradd -m $normal_user # Add username
-echo $normal_user:password | chpasswd #Add username
 usermod -aG wheel $normal_user #Add username
 
 read -p "Enter user password: " PASSWORD
 echo -e “${PASSWORD}\n${PASSWORD}” | passwd $normal_user
 unset PASSWORD
+
+# Remove the git folder
+rm -rf /my_arch_install
 
 echo Everything done! In order to finish, update visudo and then type exit, umount -a and reboot.
