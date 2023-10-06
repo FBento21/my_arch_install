@@ -7,7 +7,11 @@ locale-gen
 echo "LANG=pt_PT.UTF-8" >> /etc/locale.conf
 echo "KEYMAP=pt-latin1" >> /etc/vconsole.conf
 echo "arch" >> /etc/hostname
-echo root:password | chpasswd
+
+# Set root password (we do not use chpasswd because it does not support YESCRYPT)
+read -p "Enter root password: " PASSWORD
+echo -e “${PASSWORD}\n${PASSWORD}” | passwd $USER
+unset PASSWORD
 
 # You may need to Update reflector
 reflector --latest 100 --protocol https --sort rate --country Portugal,Spain,France,Germany --age 12 --save /etc/pacman.d/mirrorlist
@@ -52,10 +56,14 @@ systemctl enable gdm.service
 systemctl enable apparmor.service
 
 # Create username
-read -p "Enter user: " user
+read -p "Enter user: " normal_user
 
-useradd -m $user # Add username
-echo $user:password | chpasswd #Add username
-usermod -aG wheel $user #Add username
+useradd -m $normal_user # Add username
+echo $normal_user:password | chpasswd #Add username
+usermod -aG wheel $normal_user #Add username
+
+read -p "Enter user password: " PASSWORD
+echo -e “${PASSWORD}\n${PASSWORD}” | passwd $normal_user
+unset PASSWORD
 
 echo Everything done! In order to finish, update visudo and then type exit, umount -a and reboot.
