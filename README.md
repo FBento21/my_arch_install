@@ -13,6 +13,8 @@ This script installs a hyprland environment and starts any needed services. It i
 - Add the following kernel parameters to /etc/defaults/grub:
  GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet lsm=landlock,lockdown,yama,integrity,apparmor,bpf lockdown=integrity nowatchdog"
 - Add the cryptdevice UUID if using LUKS encription!
+- Do not forget to configure mkinitcpio!
+- Add user to sudoers
 
 ## To add manually after reboot:
 - Timeshift grub snapshots:

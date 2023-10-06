@@ -21,7 +21,6 @@ flatpak
 foot
 fwupd
 gammastep
-gdm
 grub
 grub-btrfs
 gvim
