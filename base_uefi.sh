@@ -9,7 +9,7 @@ echo "KEYMAP=pt-latin1" >> /etc/vconsole.conf
 echo "arch" >> /etc/hostname
 
 # Set root password (we do not use chpasswd because it does not support YESCRYPT)
-read -p "Enter root password: " PASSWORD
+read -s -p "Enter root password: " PASSWORD
 echo -e "${PASSWORD}\n${PASSWORD}" | passwd root
 unset PASSWORD
 
@@ -60,7 +60,7 @@ read -p "Enter user: " normal_user
 useradd -m $normal_user # Add username
 usermod -aG wheel $normal_user #Add username
 
-read -p "Enter user password: " PASSWORD
+read -s -p "Enter user password: " PASSWORD
 echo -e "${PASSWORD}\n${PASSWORD}" | passwd $normal_user
 unset PASSWORD
 

@@ -1,5 +1,5 @@
 # Arch install script
-This script installs a hyprland environment and starts any needed services. It is also my step by step guide on how to install Arch Linux, config a git bare repo and any other stuff needed.
+This script installs a base environment and starts any needed services. It is also my step by step guide on how to install Arch Linux.
 
 ## To add manually before install packages:
 - Edit /etc/pacman.conf
@@ -22,6 +22,3 @@ This script installs a hyprland environment and starts any needed services. It i
   - Change the line: ExecStart=/usr/bin/grub-btrfsd --syslog /.snapshots to ExecStart=/usr/bin/grub-btrfsd --syslog --timeshift-auto
   - Configure needed timeshift snapshots
 - sudo ufw enable
-
-## Acknowledgements
-This script was based on https://gitlab.com/eflinux/arch-basic
